@@ -17,8 +17,8 @@ const Index = () => {
     }
     
     try {
-      // Fetch the VBS template file
-      const response = await fetch('/src/BrainSitterAI-FocusMode.vbs');
+      // Fetch the VBS template file from public folder
+      const response = await fetch('/BrainSitterAI-FocusMode.vbs');
       const templateText = await response.text();
       
       // Replace the placeholder with the escaped task
