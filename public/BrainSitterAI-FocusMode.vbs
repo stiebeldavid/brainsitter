@@ -1,37 +1,49 @@
+' BrainSitter.ai Script - Focus Tool
 
- ' BrainSitter.ai Script - Focus Tool
+' Display an informative popup with formatting
+MsgBox "BrainSitter.ai is now activating." & vbNewLine & vbNewLine & _
+       "You want to complete" & vbNewLine & vbNewLine & "INPUT_TASK_HERE." & vbNewLine & vbNewLine & _
+       "I will help you focus! Click OK to start.", _
+       vbInformation, "BrainSitter.ai - Focus Mode"
 
- ' Display an informative popup
- MsgBox "BrainSitter.ai is now activating.  You want to complete INPUT_TASK_HERE.  I will help you focus!  ", vbInformation, "BrainSitter.ai - Focus Mode"
+' Open the specified URL in a new window
+Dim objShell
+Set objShell = CreateObject("WScript.Shell")
+objShell.Run "https://aistudio.google.com/live"
 
- ' Open the specified URL
- Dim objShell
- Set objShell = CreateObject("WScript.Shell")
- objShell.Run "https://aistudio.google.com/live"
+' Wait for the page to load (adjust as needed - 3 seconds here)
+WScript.Sleep 3000
 
- ' Wait for the page to load (adjust as needed -  3 seconds here)
- WScript.Sleep 3000
+' Activate the browser window
+objShell.AppActivate "Stream Realtime | Google AI Studio"
 
- ' Send keystrokes
+' Wait a moment for the window to gain focus
+WScript.Sleep 500
 
- WScript.Sleep 100 ' Small delay
+' Send keystrokes
+objShell.SendKeys "{TAB}"
+WScript.Sleep 100
+objShell.SendKeys "+{TAB}" ' Shift+Tab
+WScript.Sleep 100
+objShell.SendKeys "Help me focus on the task INPUT_TASK_HERE. Start by saying _I'm here to help you with your task!_ Then help me by keeping me focused on the task until it's done."
+WScript.Sleep 100
+objShell.SendKeys "^{ENTER}" ' Ctrl+Enter
+WScript.Sleep 100
+objShell.SendKeys "+{TAB}" ' Shift+Tab
+WScript.Sleep 100
+objShell.SendKeys "{ENTER}" ' Enter
+WScript.Sleep 100
+objShell.SendKeys "{ENTER}" ' Enter
+WScript.Sleep 100
+objShell.SendKeys "{TAB}"
+WScript.Sleep 100
+objShell.SendKeys "{RIGHT}"
+WScript.Sleep 100
+objShell.SendKeys "{TAB}"
+WScript.Sleep 100
+objShell.SendKeys "{ENTER}" ' Enter
 
- objShell.SendKeys "{TAB}"
+' Clean up
+Set objShell = Nothing
 
- WScript.Sleep 100
-
- objShell.SendKeys "+{TAB}" ' Shift+Tab
-
- WScript.Sleep 100
-
- objShell.SendKeys "Help me focus on the task INPUT_TASK_HERE.  Monitor my screen and keep me focused on the task until it's done."
-
- WScript.Sleep 100
-
- objShell.SendKeys "^(ENTER)" ' Ctrl+Enter
-
- ' Clean up
- Set objShell = Nothing
-
- 'WScript.Echo "BrainSitter.ai script completed.  Good luck focusing!"
- WScript.Quit
+WScript.Quit
