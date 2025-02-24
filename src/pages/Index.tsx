@@ -57,14 +57,15 @@ const Index = () => {
               </p>
               
               <div className="relative">
-                <textarea
+                <input
+                  type="text"
                   value={task}
                   onChange={(e) => setTask(e.target.value)}
                   placeholder="What would you like to accomplish today?"
-                  className="w-full h-32 p-4 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                  className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   maxLength={500}
                 />
-                <div className="absolute bottom-3 right-3 flex items-center gap-2 text-sm text-gray-400">
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-sm text-gray-400">
                   <span>{task.length}/500</span>
                   <Mic className="w-4 h-4 cursor-pointer hover:text-primary transition-colors" />
                 </div>
