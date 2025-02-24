@@ -1,11 +1,12 @@
-
 import { useState } from "react";
 import { Mic, Download, Brain, Computer, Apple } from "lucide-react";
 import { toast } from "sonner";
+import { InstructionsDialog } from "@/components/InstructionsDialog";
 
 const Index = () => {
   const [task, setTask] = useState("");
   const [selectedOS, setSelectedOS] = useState("windows");
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +27,8 @@ const Index = () => {
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
     
-    toast.success("Your BrainSitter is ready! The file has been downloaded.");
+    // Show instructions dialog
+    setShowInstructions(true);
   };
 
   const examples = [
@@ -161,6 +163,12 @@ const Index = () => {
             Sign up for Apple access
           </button>
         </div>
+
+        <InstructionsDialog 
+          open={showInstructions} 
+          onOpenChange={setShowInstructions}
+          taskDescription={task}
+        />
       </div>
     </div>
   );
