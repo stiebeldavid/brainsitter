@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Mic, Download, Brain, Computer, Apple } from "lucide-react";
 import { toast } from "sonner";
@@ -8,27 +9,39 @@ const Index = () => {
   const [selectedOS, setSelectedOS] = useState("windows");
   const [showInstructions, setShowInstructions] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!task) {
       toast.error("Please describe your task first");
       return;
     }
     
-    // Create and download .vbs file
-    const vbsContent = `MsgBox "Starting task: ${task}"\n`;
-    const blob = new Blob([vbsContent], { type: "application/x-vbs" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "brainsitter-task.vbs";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-    
-    // Show instructions dialog
-    setShowInstructions(true);
+    try {
+      // Fetch the VBS template file
+      const response = await fetch('/src/BrainSitterAI-FocusMode.vbs');
+      const templateText = await response.text();
+      
+      // Replace the placeholder with the escaped task
+      const escapedTask = task.replace(/["']/g, "'"); // Replace quotes with single quotes
+      const vbsContent = templateText.replace(/INPUT_TASK_HERE/g, escapedTask);
+      
+      // Create and download the file
+      const blob = new Blob([vbsContent], { type: "application/x-vbs" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "BrainSitterAI-FocusMode.vbs";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      // Show instructions dialog
+      setShowInstructions(true);
+    } catch (error) {
+      console.error('Error creating VBS file:', error);
+      toast.error("There was an error creating your BrainSitter file");
+    }
   };
 
   const examples = [
