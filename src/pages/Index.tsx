@@ -77,11 +77,11 @@ const Index = () => {
                   value={task}
                   onChange={(e) => setTask(e.target.value)}
                   placeholder="What would you like to accomplish today?"
-                  className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  maxLength={500}
+                  className="w-full p-4 pr-20 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
                 />
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-sm text-gray-400">
-                  <span>{task.length}/500</span>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-sm text-gray-400 bg-white pl-2">
+                  <span className="hidden md:inline">{task.length}/500</span>
+                  <span className="md:hidden">{task.length}</span>
                   <Mic className="w-4 h-4 cursor-pointer hover:text-primary transition-colors" />
                 </div>
               </div>
