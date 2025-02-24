@@ -1,17 +1,17 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FileDown, PlayCircle } from "lucide-react";
-
 interface InstructionsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   taskDescription: string;
 }
-
-export const InstructionsDialog = ({ open, onOpenChange, taskDescription }: InstructionsDialogProps) => {
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+export const InstructionsDialog = ({
+  open,
+  onOpenChange,
+  taskDescription
+}: InstructionsDialogProps) => {
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Your BrainSitter is Ready!</DialogTitle>
@@ -27,9 +27,7 @@ export const InstructionsDialog = ({ open, onOpenChange, taskDescription }: Inst
             </div>
             <div>
               <h4 className="font-semibold">1. Find your downloaded file</h4>
-              <p className="text-sm text-gray-600">
-                Look for "brainsitter-task.vbs" in your downloads folder
-              </p>
+              <p className="text-sm text-gray-600">Look for &quot;BrainSitterAI-FocusMode.vbs&quot; in your Downloads folder</p>
             </div>
           </div>
 
@@ -55,14 +53,10 @@ export const InstructionsDialog = ({ open, onOpenChange, taskDescription }: Inst
         </div>
 
         <div className="flex justify-end">
-          <Button 
-            onClick={() => onOpenChange(false)}
-            className="bg-primary hover:bg-primary-dark"
-          >
+          <Button onClick={() => onOpenChange(false)} className="bg-primary hover:bg-primary-dark">
             Got it
           </Button>
         </div>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
